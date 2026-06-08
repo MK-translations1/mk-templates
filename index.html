@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Шаблони перекладу документів — Mk.translations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --electric: #1652f0;
+    --electric-dark: #0a3bcc;
+    --electric-light: #4f7ffc;
+    --ink: #0a1330;
+    --ink-soft: #2a3354;
+    --muted: #6b7493;
+    --bg: #ffffff;
+    --bg-soft: #f5f7ff;
+    --bg-blue: #eef2ff;
+    --line: #e4e8f5;
+    --accent: #00d4ff;
+    --shadow-sm: 0 4px 16px rgba(22, 82, 240, 0.08);
+    --shadow-md: 0 12px 40px rgba(22, 82, 240, 0.12);
+    --shadow-lg: 0 24px 80px rgba(22, 82, 240, 0.18);
+    --radius: 16px;
+    --radius-lg: 24px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 100px 0; position: relative; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); }
+  h2 { font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 20px; }
+  h3 { font-size: 1.4rem; margin-bottom: 10px; }
+  p { color: var(--ink-soft); font-size: 1.05rem; }
+  .lead { font-size: 1.2rem; color: var(--ink-soft); }
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--electric);
+    background: var(--bg-blue);
+    padding: 8px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(228, 232, 245, 0.6);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .logo .dot {
+    width: 8px; height: 8px;
+    background: var(--electric);
+    border-radius: 50%;
+    margin: 0 2px 0 -2px;
+    align-self: flex-end;
+    margin-bottom: 8px;
+  }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--electric); }
+  @media (max-width: 768px) { .nav-links { display: none; } }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--electric);
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s ease;
+    box-shadow: 0 8px 24px rgba(22, 82, 240, 0.3);
+  }
+  .btn:hover {
+    background: var(--electric-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(22, 82, 240, 0.4);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--line);
+    box-shadow: none;
+  }
+  .btn-ghost:hover {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--electric);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { background: #fff; color: var(--electric-dark); }
+
+  /* HERO */
+  .hero {
+    padding: 160px 0 100px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(22, 82, 240, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
+      var(--bg);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 968px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--electric) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero .lead { margin: 24px 0 36px; max-width: 560px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-trust {
+    margin-top: 40px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .trust-item { display: flex; align-items: center; gap: 10px; }
+  .trust-item .num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--electric);
+    letter-spacing: -0.03em;
+  }
+  .trust-item .label { font-size: 0.9rem; color: var(--muted); line-height: 1.2; }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .doc-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+  }
+  .doc-main {
+    inset: 10% 15% 10% 15%;
+    background: linear-gradient(135deg, #fff 0%, #f5f7ff 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .doc-main .doc-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 12px; border-bottom: 2px solid var(--bg-blue);
+  }
+  .doc-main .doc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  .doc-main .badge {
+    background: var(--electric);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .doc-line { height: 8px; background: var(--bg-blue); border-radius: 4px; }
+  .doc-line.short { width: 60%; }
+  .doc-line.medium { width: 80%; }
+  .doc-floating {
+    width: 180px;
+    bottom: 5%;
+    right: -5%;
+    background: linear-gradient(135deg, var(--electric) 0%, var(--electric-dark) 100%);
+    color: #fff;
+    transform: rotate(6deg);
+    border: none;
+  }
+  .doc-floating .ico {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .doc-floating .ft { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; }
+  .doc-floating .fs { font-size: 0.8rem; opacity: 0.8; }
+  .doc-tag {
+    top: 5%; left: -5%;
+    background: #fff;
+    padding: 14px 18px;
+    transform: rotate(-4deg);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .doc-tag .dot-anim {
+    width: 10px; height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2); }
+    50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+  }
+  .doc-tag .t { font-weight: 600; font-size: 0.85rem; color: var(--ink); }
+
+  /* STATS BAR */
+  .stats {
+    padding: 60px 0;
+    background: var(--ink);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .stats::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(22, 82, 240, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.2) 0%, transparent 50%);
+  }
+  .stats-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+
+  /* WHAT IS IT */
+  .what {
+    background: var(--bg);
+  }
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 968px) { .what-grid { grid-template-columns: 1fr; } }
+  .what-visual {
+    background: linear-gradient(135deg, var(--electric) 0%, var(--electric-dark) 100%);
+    border-radius: var(--radius-lg);
+    padding: 50px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .what-visual::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -30%;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+  .what-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -40%; left: -20%;
+    width: 80%; height: 80%;
+    background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, transparent 60%);
+  }
+  .what-quote {
+    position: relative;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 30px;
+  }
+  .quote-mark { font-size: 5rem; line-height: 0.5; opacity: 0.4; display: block; margin-bottom: 10px; }
+  .what-meta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  .avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    display: grid; place-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--electric);
+  }
+
+  /* WHY / BENEFITS */
+  .why { background: var(--bg-soft); }
+  .why-header { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .benefit-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 36px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-sm);
+    transition: all .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .benefit-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .benefit-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, var(--electric) 0%, var(--electric-light) 100%);
+    border-radius: 14px;
+    display: grid; place-items: center;
+    color: #fff;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 20px rgba(22, 82, 240, 0.25);
+  }
+  .benefit-icon svg { width: 28px; height: 28px; }
+  .benefit-card h3 { margin-bottom: 10px; }
+
+  /* QUIZ */
+  .quiz {
+    background:
+      radial-gradient(ellipse at top, rgba(22, 82, 240, 0.05) 0%, transparent 60%),
+      var(--bg);
+  }
+  .quiz-wrap { max-width: 800px; margin: 0 auto; }
+  .quiz-header { text-align: center; margin-bottom: 50px; }
+  .quiz-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: var(--shadow-md);
+  }
+  @media (max-width: 640px) { .quiz-box { padding: 28px; } }
+  .step { margin-bottom: 36px; }
+  .step-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--electric);
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .step-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .options label {
+    background: var(--bg-soft);
+    border: 2px solid transparent;
+    padding: 16px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .2s ease;
+    text-align: center;
+    font-weight: 500;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .options input[type="radio"] { display: none; }
+  .options label:hover { border-color: var(--electric-light); color: var(--ink); }
+  .options label:has(input:checked) {
+    background: var(--electric);
+    color: #fff;
+    border-color: var(--electric);
+    box-shadow: 0 8px 20px rgba(22, 82, 240, 0.3);
+  }
+  .quiz-cta {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    margin-top: 16px;
+  }
+  .quiz-cta .price-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .quiz-cta .price-pill .label { color: var(--muted); font-size: 0.9rem; }
+  .quiz-cta .price-pill .price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--electric);
+  }
+  .cta-note {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cta-note span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* TRANSLIT */
+  .translit {
+    background: var(--bg);
+  }
+  .translit-card {
+    background: linear-gradient(135deg, var(--ink) 0%, #1a2150 100%);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .translit-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(22, 82, 240, 0.4) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.25) 0%, transparent 40%);
+  }
+  .translit-card > * { position: relative; }
+  .translit-card h2 { color: #fff; max-width: 700px; margin: 0 auto 16px; }
+  .translit-card p { color: rgba(255,255,255,0.8); max-width: 640px; margin: 0 auto 30px; }
+  @media (max-width: 640px) { .translit-card { padding: 40px 24px; } }
+
+  /* DOUBTS */
+  .doubts { background: var(--bg-soft); }
+  .doubts-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  @media (max-width: 640px) { .doubts-inner { padding: 40px 24px; } }
+
+  /* FAQ */
+  .faq { background: var(--bg); }
+  .faq-wrap { max-width: 860px; margin: 0 auto; }
+  .faq-header { text-align: center; margin-bottom: 50px; }
+  details {
+    background: var(--bg-soft);
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  details:hover { border-color: var(--line); }
+  details[open] {
+    background: #fff;
+    border-color: var(--electric);
+    box-shadow: var(--shadow-sm);
+  }
+  summary {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.08rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .chev {
+    width: 32px; height: 32px;
+    background: var(--bg-blue);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: var(--electric);
+    font-size: 1.3rem;
+    transition: all .25s ease;
+    flex-shrink: 0;
+  }
+  details[open] summary .chev {
+    background: var(--electric);
+    color: #fff;
+    transform: rotate(45deg);
+  }
+  details p { margin-top: 16px; color: var(--ink-soft); }
+  details a { color: var(--electric); font-weight: 600; }
+
+  /* FINAL CTA */
+  .final-cta {
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(22, 82, 240, 0.4) 0%, transparent 50%),
+      var(--ink);
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+  }
+  .final-cta h2 { color: #fff; max-width: 720px; margin: 0 auto 20px; }
+  .final-cta p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 36px; font-size: 1.15rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+
+  /* FLOATING CONTACT */
+  .floating-contacts {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .fc-btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--electric);
+    color: #fff;
+    display: grid; place-items: center;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(22, 82, 240, 0.4);
+    transition: all .25s ease;
+    position: relative;
+  }
+  .fc-btn:hover { transform: scale(1.1) translateY(-2px); }
+  .fc-btn.telegram { background: #0088cc; box-shadow: 0 10px 30px rgba(0, 136, 204, 0.4); }
+  .fc-btn.call { background: #22c55e; box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4); }
+  .fc-btn svg { width: 24px; height: 24px; }
+  .fc-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    animation: ping 2s infinite;
+    opacity: 0;
+  }
+  .fc-btn:first-child::after { animation-delay: 0s; }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+  @media (max-width: 640px) {
+    .floating-contacts { right: 16px; bottom: 16px; }
+    .fc-btn { width: 48px; height: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">Mk<span class="dot"></span>templates</a>
+    <div class="nav-links">
+      <a href="#what">Як це працює</a>
+      <a href="#why">Переваги</a>
+      <a href="#quiz">Шаблони</a>
+      <a href="#faq">FAQ</a>
+      <a href="#quiz" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Обрати шаблон</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Шаблони від бюро перекладів</span>
+        <h1>Переклад документа <span>за ціною бланку</span> і з якістю бюро</h1>
+        <p class="lead">Внесіть свої дані в готовий макет і отримуйте професійно оформлений переклад документів без переплат і зайвого клопоту. Шаблони, які напрацьовувалися роками реальної практики.</p>
+        <div class="hero-actions">
+          <a href="#quiz" class="btn">
+            Обрати шаблон і зекономити
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#what" class="btn btn-ghost">Як це працює</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <div class="num">11+</div>
+            <div class="label">років<br>досвіду</div>
+          </div>
+          <div class="trust-item">
+            <div class="num">100+</div>
+            <div class="label">мов<br>перекладу</div>
+          </div>
+          <div class="trust-item">
+            <div class="num">15хв</div>
+            <div class="label">на готовий<br>документ</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="doc-card doc-tag">
+          <div class="dot-anim"></div>
+          <div class="t">Прийнято установою</div>
+        </div>
+        <div class="doc-card doc-main">
+          <div class="doc-header">
+            <div class="doc-title">PASSPORT • ПАСПОРТ</div>
+            <div class="badge">EN</div>
+          </div>
+          <div class="doc-line medium"></div>
+          <div class="doc-line"></div>
+          <div class="doc-line short"></div>
+          <div class="doc-line medium"></div>
+          <div class="doc-line"></div>
+          <div class="doc-line short"></div>
+          <div class="doc-line medium"></div>
+        </div>
+        <div class="doc-card doc-floating">
+          <div class="ico">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          </div>
+          <div class="ft">Миттєве</div>
+          <div class="fs">завантаження</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">11+</div>
+        <div class="stat-label">років практики бюро</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">мови у шаблонах</div>
+      </div>
+      <div>
+        <div class="stat-num">15хв</div>
+        <div class="stat-label">середній час заповнення</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">відповідність стандартам</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="what" id="what">
+  <div class="container">
+    <div class="what-grid">
+      <div>
+        <span class="eyebrow">Що це таке</span>
+        <h2>Вам залишається тільки вписати свої дані і роздрукувати документ</h2>
+        <p class="lead" style="margin-bottom: 20px;">Ми взяли документи, які перекладаємо щодня, й оформили їх у шаблони з правильною структурою, шрифтами, розміщенням полів і стилістикою офіційного перекладу.</p>
+        <p>Якщо ваш випадок не вимагає нотаріального засвідчення, а в більшості буденних ситуацій воно справді не потрібне — замовляти повний переклад у бюро просто немає потреби. Ви цілком можете впоратися самостійно за 10–15 хвилин, заощадивши і час, і гроші.</p>
+      </div>
+      <div class="what-visual">
+        <div class="quote-mark">"</div>
+        <div class="what-quote">Ті самі макети, які бюро використовує у щоденній роботі — тепер у ваших руках.</div>
+        <div class="what-meta">
+          <div class="avatar">MK</div>
+          <div>
+            <div style="font-weight: 700; font-family: 'Space Grotesk', sans-serif;">Mk.templates</div>
+            <div style="font-size: 0.9rem; opacity: 0.7;">Бюро перекладів</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / BENEFITS -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-header">
+      <span class="eyebrow">Чому це працює</span>
+      <h2>Шаблони, яким довіряють установи</h2>
+      <p class="lead">Ці макети формувалися роками реальної практики. Їх приймали банки, нотаріуси, міграційні служби, університети. Ми добре вивчили, як має виглядати документ, щоб його прийняли з першого разу.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Економія часу</h3>
+        <p>Заповнюєте одразу, без очікування та узгоджень. 15 хвилин — і документ готовий до подачі.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Економія грошей</h3>
+        <p>Платите за шаблон, а не за повну послугу бюро. Та сама якість — у рази дешевше.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.4 0 4.6.94 6.22 2.47"/></svg>
+        </div>
+        <h3>Перевірена якість</h3>
+        <p>Структура й оформлення від бюро перекладів із багаторічним досвідом. Без ризику для документа.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz" id="quiz">
+  <div class="container">
+    <div class="quiz-wrap">
+      <div class="quiz-header">
+        <span class="eyebrow">Анкета</span>
+        <h2>Оберіть потрібний шаблон</h2>
+        <p class="lead">Три швидкі кроки — і шаблон у вас на пристрої</p>
+      </div>
+      <div class="quiz-box">
+        <div class="step">
+          <div class="step-meta">
+            <div class="step-num">1</div>
+            <div class="step-q">На яку мову перекладаємо?</div>
+          </div>
+          <div class="options">
+            <label><input type="radio" name="lang">🇬🇧 Англійська</label>
+            <label><input type="radio" name="lang">🇩🇪 Німецька</label>
+            <label><input type="radio" name="lang">🇵🇱 Польська</label>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-meta">
+            <div class="step-num">2</div>
+            <div class="step-q">Куди подаємо переклад?</div>
+          </div>
+          <div class="options">
+            <label><input type="radio" name="dest">Для навчання</label>
+            <label><input type="radio" name="dest">В офіційну установу</label>
+            <label><input type="radio" name="dest">Інше</label>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-meta">
+            <div class="step-num">3</div>
+            <div class="step-q">Який документ потрібно перекласти?</div>
+          </div>
+          <div class="options">
+            <label><input type="radio" name="doc">Паспорт</label>
+            <label><input type="radio" name="doc">Свідоцтво про народження</label>
+            <label><input type="radio" name="doc">ІПН</label>
+          </div>
+        </div>
+        <div class="quiz-cta">
+          <div class="price-pill">
+            <span class="label">Ціна шаблону:</span>
+            <span class="price">[ціна]</span>
+          </div>
+          <div>
+            <a href="#" class="btn">
+              Отримати шаблон зараз
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            </a>
+          </div>
+          <div class="cta-note">
+            <span>⚡ Миттєве завантаження</span>
+            <span>✓ Без реєстрації</span>
+            <span>✓ Без зайвих кроків</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSLIT -->
+<section class="translit">
+  <div class="container">
+    <div class="translit-card">
+      <span class="eyebrow" style="background: rgba(255,255,255,0.1); color: var(--accent);">Транслітерація</span>
+      <h2>Не впевнені, як написати прізвище латиницею?</h2>
+      <p>Офіційні правила написання українських імен і прізвищ латиницею затверджені Державною міграційною службою України. Перевірте написання перед тим, як вносити дані — це займе хвилину й позбавить від зайвих помилок.</p>
+      <a href="https://dmsu.gov.ua/" target="_blank" rel="noopener" class="btn btn-white">
+        Перевірити транслітерацію на сайті ДМС
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <p style="margin-top: 20px; color: rgba(255,255,255,0.6); font-size: 0.9rem;">Це офіційно і безкоштовно.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOUBTS -->
+<section class="doubts">
+  <div class="container">
+    <div class="doubts-inner">
+      <span class="eyebrow">Підтримка</span>
+      <h2>Залишилися сумніви?</h2>
+      <p class="lead" style="margin-bottom: 30px;">Шаблон чудово підходить для більшості ситуацій, але якщо ваш документ нестандартний, потрібне нотаріальне засвідчення або ви просто хочете, щоб усе зробив фахівець — напишіть нам. Розберемося разом і підкажемо найкращий варіант саме для вашого випадку.</p>
+      <a href="#" class="btn btn-ghost">
+        Замовити традиційний переклад
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-wrap">
+      <div class="faq-header">
+        <span class="eyebrow">FAQ</span>
+        <h2>Питання, які виникають найчастіше</h2>
+      </div>
+
+      <details>
+        <summary>Чи приймуть такий переклад в установі? <span class="chev">+</span></summary>
+        <p>У переважній більшості випадків — так. Шаблон відповідає стандартам оформлення офіційних перекладів і формувався саме з урахуванням вимог реальних установ. Якщо конкретна установа вимагає нотаріального засвідчення, це окремий процес, і ми про це чесно попереджаємо ще до покупки.</p>
+      </details>
+
+      <details>
+        <summary>У чому різниця між шаблоном і замовленням перекладу у бюро? <span class="chev">+</span></summary>
+        <p>При замовленні перекладу перекладач вносить дані у шаблон за вас і несе повну відповідальність за результат. Шаблон — це той самий макет, який він використовує, але ви заповнюєте їх самостійно. Якщо вам комфортно зробити це самому, шаблон дозволить суттєво заощадити. Якщо ні або якщо виникають сумніви — ми завжди поруч.</p>
+      </details>
+
+      <details>
+        <summary>Чи складно заповнити шаблон самостійно? <span class="chev">+</span></summary>
+        <p>Ні, усі поля підписані й логіка заповнення інтуїтивно зрозуміла. Просто внесіть дані та роздрукуйте. Більшість людей справляються за 10–15 хвилин навіть без жодного досвіду роботи з офіційними документами.</p>
+      </details>
+
+      <details>
+        <summary>Як правильно написати прізвище та ім'я латиницею? <span class="chev">+</span></summary>
+        <p>Використовуйте офіційні правила транслітерації, затверджені Державною міграційною службою України. На сайті ДМС є безкоштовний сервіс перевірки — введіть прізвище й отримаєте правильне написання за секунду. <a href="https://dmsu.gov.ua/" target="_blank" rel="noopener">Перевірити транслітерацію →</a></p>
+      </details>
+
+      <details>
+        <summary>Що, якщо я зроблю помилку при заповненні? <span class="chev">+</span></summary>
+        <p>Нічого страшного. Шаблон можна редагувати та роздруковувати повторно скільки завгодно разів. Файл залишається у вас назавжди.</p>
+      </details>
+
+      <details>
+        <summary>Які документи охоплюють ваші шаблони? <span class="chev">+</span></summary>
+        <p>Наразі доступні шаблони для паспорта, свідоцтва про народження та ІПН. Список поступово буде розширюватися.</p>
+      </details>
+
+      <details>
+        <summary>Чи можу я замовити шаблон, якого немає в списку? <span class="chev">+</span></summary>
+        <p>Напишіть нам у Telegram, і ми оперативно знайдемо рішення.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <span class="eyebrow" style="background: rgba(255,255,255,0.1); color: var(--accent);">Час діяти</span>
+    <h2>Заощадьте час і гроші вже сьогодні</h2>
+    <p>Шаблони від бюро перекладів із багаторічним досвідом тепер у ваших руках. Завантажуйте, заповнюйте, подавайте.</p>
+    <a href="#quiz" class="btn btn-white">
+      Обрати шаблон
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Mk.templates — шаблони перекладу документів. Усі права захищено.
+  </div>
+</footer>
+
+<!-- FLOATING CONTACTS -->
+<div class="floating-contacts">
+  <a href="#" class="fc-btn telegram" title="Telegram">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <a href="#" class="fc-btn call" title="Замовити дзвінок">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+</div>
+
+</body>
+</html>
