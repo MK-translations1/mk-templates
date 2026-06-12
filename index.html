@@ -636,6 +636,12 @@
     margin-top: 14px;
   }
   .form-error.show { display: block; }
+  .consent-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+  .consent-note a { color: var(--muted); }
   .quiz-success { text-align: center; padding: 30px 10px; }
   .quiz-success .ok-ico {
     width: 64px; height: 64px;
@@ -1012,6 +1018,7 @@
               </button>
             </div>
             <p class="form-error" id="form-error">Будь ласка, дайте відповідь на всі питання та вкажіть email.</p>
+            <p class="consent-note">Натискаючи кнопку, ви погоджуєтеся з <a href="privacy.html" target="_blank">політикою конфіденційності</a>.</p>
             <div class="cta-note">
               <span>⚡ Шаблон — одразу на ваш email</span>
               <span>✓ Без реєстрації та акаунтів</span>
@@ -1159,7 +1166,7 @@
 
 <footer>
   <div class="container">
-    © 2026 DOCU.templates — шаблони перекладу документів. Усі права захищено.
+    © 2026 DOCU.templates — шаблони перекладу документів. Усі права захищено. · <a href="privacy.html" style="color: inherit;">Політика конфіденційності</a>
   </div>
 </footer>
 
@@ -1246,6 +1253,12 @@
           form.hidden = true;
           successEl.hidden = false;
           successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // конверсія для Google Ads / GA4 (активується після додавання gtag.js)
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', { document: doc, language: lang });
+            // TODO: розкоментувати після створення дії-конверсії в Google Ads:
+            // gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/YYYYYYYYYYY' });
+          }
         } else {
           throw new Error(res.message || 'send failed');
         }
