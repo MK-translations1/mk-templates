@@ -266,9 +266,10 @@
     display: block;
     border-radius: 10px;
     border: 1px solid var(--line);
-    max-height: 420px;
+    max-height: 400px;
     object-fit: cover;
     object-position: top center;
+    background: #fff;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
   }
   /* bottom row: download + steps */
@@ -555,6 +556,93 @@
     flex-wrap: wrap;
   }
   .cta-note span { display: inline-flex; align-items: center; gap: 6px; }
+  /* contact step */
+  .contact-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .contact-fields { grid-template-columns: 1fr; } }
+  .field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .field label .opt { font-weight: 400; color: var(--muted); }
+  .field input {
+    width: 100%;
+    padding: 15px 18px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: var(--bg-soft);
+    font: inherit;
+    color: var(--ink);
+    transition: all .2s ease;
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--electric);
+    background: #fff;
+  }
+  .field input.invalid { border-color: #dc2626; }
+  /* template preview link in quiz */
+  .quiz-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    text-align: left;
+    text-decoration: none;
+    transition: border-color .2s ease;
+  }
+  .quiz-preview:hover { border-color: var(--electric-light); }
+  .quiz-preview img {
+    width: 56px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: #fff;
+    flex-shrink: 0;
+  }
+  .quiz-preview .qp-t { display: block; font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+  .quiz-preview .qp-s { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  /* validation + success */
+  .step.missing .step-num { background: #dc2626; animation: shake .3s ease; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+  .form-error {
+    display: none;
+    color: #dc2626;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 14px;
+  }
+  .form-error.show { display: block; }
+  .quiz-success { text-align: center; padding: 30px 10px; }
+  .quiz-success .ok-ico {
+    width: 64px; height: 64px;
+    margin: 0 auto 20px;
+    background: #22c55e;
+    color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+  }
+  .quiz-success h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .quiz-success p { color: var(--ink-soft); max-width: 440px; margin: 0 auto; }
 
   /* TRANSLIT */
   .translit {
@@ -770,7 +858,7 @@
             <div class="doc-title">ПАСПОРТ · REISEPASS</div>
             <div class="badge">DE</div>
           </div>
-          <img class="doc-page" src="assets/template-preview.png" alt="Готовий шаблон перекладу паспорта громадянина України німецькою мовою" loading="lazy" width="827" height="1169">
+          <img class="doc-page" src="assets/hero-fragment.png" alt="Фрагмент готового шаблону перекладу паспорта німецькою мовою" loading="lazy" width="690" height="930">
         </div>
         <div class="doc-bottom-row">
           <div class="doc-floating">
@@ -791,30 +879,6 @@
   </div>
 </section>
 
-<!-- STATS -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div>
-        <div class="stat-num">11+</div>
-        <div class="stat-label">років практики бюро</div>
-      </div>
-      <div>
-        <div class="stat-num">3</div>
-        <div class="stat-label">мови у шаблонах</div>
-      </div>
-      <div>
-        <div class="stat-num">15хв</div>
-        <div class="stat-label">середній час заповнення</div>
-      </div>
-      <div>
-        <div class="stat-num">100%</div>
-        <div class="stat-label">відповідність стандартам</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- WHAT IS IT -->
 <section class="what" id="what">
   <div class="container">
@@ -823,7 +887,7 @@
         <span class="eyebrow">Що це таке</span>
         <h2>Вам залишається тільки вписати свої дані і роздрукувати документ</h2>
         <p class="lead" style="margin-bottom: 20px;">Ми взяли документи, які перекладаємо щодня, й оформили їх у шаблони з правильною структурою, шрифтами, розміщенням полів і стилістикою офіційного перекладу.</p>
-        <p>Якщо ваш випадок не вимагає нотаріального засвідчення, а в більшості буденних ситуацій воно справді не потрібне — замовляти повний переклад у бюро просто немає потреби. Ви цілком можете впоратися самостійно за 10–15 хвилин, заощадивши і час, і гроші.</p>
+        <p>Якщо нотаріальне засвідчення не потрібне — а в більшості буденних ситуацій так і є — повний переклад замовляти немає сенсу. 10–15 хвилин самостійно, і документ готовий.</p>
       </div>
       <div class="what-visual">
         <div class="quote-mark">"</div>
@@ -884,55 +948,96 @@
         <p class="lead">Три швидкі кроки — і шаблон у вас на пристрої</p>
       </div>
       <div class="quiz-box">
-        <div class="step">
-          <div class="step-meta">
-            <div class="step-num">1</div>
-            <div class="step-q">На яку мову перекладаємо?</div>
+        <form id="lead-form" novalidate>
+          <!-- TODO: вставте свій ключ із https://web3forms.com -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="from_name" value="DOCU.templates — лендінг">
+          <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="step" data-step="lang">
+            <div class="step-meta">
+              <div class="step-num">1</div>
+              <div class="step-q">На яку мову перекладаємо?</div>
+            </div>
+            <div class="options">
+              <label><input type="radio" name="Мова" value="Англійська">🇬🇧 Англійська</label>
+              <label><input type="radio" name="Мова" value="Німецька">🇩🇪 Німецька</label>
+              <label><input type="radio" name="Мова" value="Польська">🇵🇱 Польська</label>
+            </div>
           </div>
-          <div class="options">
-            <label><input type="radio" name="lang">🇬🇧 Англійська</label>
-            <label><input type="radio" name="lang">🇩🇪 Німецька</label>
-            <label><input type="radio" name="lang">🇵🇱 Польська</label>
+          <div class="step" data-step="dest">
+            <div class="step-meta">
+              <div class="step-num">2</div>
+              <div class="step-q">Куди подаємо переклад?</div>
+            </div>
+            <div class="options">
+              <label><input type="radio" name="Призначення" value="Для навчання">Для навчання</label>
+              <label><input type="radio" name="Призначення" value="В офіційну установу">В офіційну установу</label>
+              <label><input type="radio" name="Призначення" value="Інше">Інше</label>
+            </div>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-meta">
-            <div class="step-num">2</div>
-            <div class="step-q">Куди подаємо переклад?</div>
+          <div class="step" data-step="doc">
+            <div class="step-meta">
+              <div class="step-num">3</div>
+              <div class="step-q">Який документ потрібно перекласти?</div>
+            </div>
+            <div class="options">
+              <label><input type="radio" name="Документ" value="Паспорт">Паспорт</label>
+              <label><input type="radio" name="Документ" value="Свідоцтво про народження">Свідоцтво про народження</label>
+              <label><input type="radio" name="Документ" value="ІПН">ІПН</label>
+            </div>
           </div>
-          <div class="options">
-            <label><input type="radio" name="dest">Для навчання</label>
-            <label><input type="radio" name="dest">В офіційну установу</label>
-            <label><input type="radio" name="dest">Інше</label>
+          <div class="step" data-step="contact">
+            <div class="step-meta">
+              <div class="step-num">4</div>
+              <div class="step-q">Куди надіслати шаблон?</div>
+            </div>
+            <div class="contact-fields">
+              <div class="field">
+                <label for="lead-email">Email</label>
+                <input type="email" id="lead-email" name="Email" placeholder="name@example.com" required>
+              </div>
+              <div class="field">
+                <label for="lead-phone">Телефон або Telegram <span class="opt">(необов'язково)</span></label>
+                <input type="text" id="lead-phone" name="Телефон / Telegram" placeholder="+380… або @username">
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="step">
-          <div class="step-meta">
-            <div class="step-num">3</div>
-            <div class="step-q">Який документ потрібно перекласти?</div>
-          </div>
-          <div class="options">
-            <label><input type="radio" name="doc">Паспорт</label>
-            <label><input type="radio" name="doc">Свідоцтво про народження</label>
-            <label><input type="radio" name="doc">ІПН</label>
-          </div>
-        </div>
-        <div class="quiz-cta">
-          <div class="price-pill">
-            <span class="label">Ціна шаблону:</span>
-            <span class="price">[ціна]</span>
-          </div>
-          <div>
-            <a href="#" class="btn">
-              Отримати шаблон зараз
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+
+          <div class="quiz-cta">
+            <a class="quiz-preview" href="assets/template-preview.png" target="_blank" rel="noopener">
+              <img src="assets/hero-fragment.png" alt="Приклад шаблону перекладу паспорта" loading="lazy" width="56" height="75">
+              <span>
+                <span class="qp-t">Так виглядає шаблон зсередини</span>
+                <span class="qp-s">Приклад: паспорт → німецька. Натисніть, щоб роздивитися</span>
+              </span>
             </a>
+            <div class="price-pill">
+              <span class="label">Ціна шаблону:</span>
+              <!-- TODO: вкажіть реальну ціну -->
+              <span class="price">199 грн</span>
+            </div>
+            <div>
+              <button type="submit" class="btn" id="lead-submit">
+                Отримати шаблон
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              </button>
+            </div>
+            <p class="form-error" id="form-error">Будь ласка, дайте відповідь на всі питання та вкажіть email.</p>
+            <div class="cta-note">
+              <span>⚡ Шаблон — одразу на ваш email</span>
+              <span>✓ Без реєстрації та акаунтів</span>
+              <span>✓ Редагуйте й друкуйте без обмежень</span>
+            </div>
           </div>
-          <div class="cta-note">
-            <span>⚡ Миттєве завантаження</span>
-            <span>✓ Без реєстрації</span>
-            <span>✓ Без зайвих кроків</span>
+        </form>
+
+        <div class="quiz-success" id="quiz-success" hidden>
+          <div class="ok-ico">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
           </div>
+          <h3>Заявку отримано!</h3>
+          <p>Ми вже бачимо ваш запит і надішлемо шаблон на вказаний email найближчим часом. Якщо щось термінове — пишіть у Telegram.</p>
         </div>
       </div>
     </div>
@@ -961,8 +1066,9 @@
     <div class="doubts-inner">
       <span class="eyebrow">Підтримка</span>
       <h2>Залишилися сумніви?</h2>
-      <p class="lead" style="margin-bottom: 30px;">Шаблон чудово підходить для більшості ситуацій, але якщо ваш документ нестандартний, потрібне нотаріальне засвідчення або ви просто хочете, щоб усе зробив фахівець — напишіть нам. Розберемося разом і підкажемо найкращий варіант саме для вашого випадку.</p>
-      <a href="#" class="btn btn-ghost">
+      <p class="lead" style="margin-bottom: 30px;">Документ нестандартний, потрібен нотаріус або просто хочете, щоб усе зробив фахівець? Напишіть нам — підкажемо найкращий варіант для вашого випадку.</p>
+      <!-- TODO: вставте реальний username Telegram -->
+      <a href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener" class="btn btn-ghost">
         Замовити традиційний переклад
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -986,7 +1092,7 @@
 
       <details>
         <summary>У чому різниця між шаблоном і замовленням перекладу у бюро? <span class="chev">+</span></summary>
-        <p>При замовленні перекладу перекладач вносить дані у шаблон за вас і несе повну відповідальність за результат. Шаблон — це той самий макет, який він використовує, але ви заповнюєте їх самостійно. Якщо вам комфортно зробити це самому, шаблон дозволить суттєво заощадити. Якщо ні або якщо виникають сумніви — ми завжди поруч.</p>
+        <p>При замовленні перекладу перекладач вносить дані у шаблон за вас і несе повну відповідальність за результат. Шаблон — це той самий макет, який він використовує, але ви заповнюєте його самостійно. Якщо вам комфортно зробити це самому, шаблон дозволить суттєво заощадити. Якщо ні або якщо виникають сумніви — ми завжди поруч.</p>
       </details>
 
       <details>
@@ -1032,19 +1138,93 @@
 
 <footer>
   <div class="container">
-    © 2026 Mk.templates — шаблони перекладу документів. Усі права захищено.
+    © 2026 DOCU.templates — шаблони перекладу документів. Усі права захищено.
   </div>
 </footer>
 
 <!-- FLOATING CONTACTS -->
+<!-- TODO: вставте реальні username Telegram та номер телефону -->
 <div class="floating-contacts">
-  <a href="#" class="fc-btn telegram" title="Telegram">
+  <a href="https://t.me/YOUR_TELEGRAM" target="_blank" rel="noopener" class="fc-btn telegram" title="Telegram">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
-  <a href="#" class="fc-btn call" title="Замовити дзвінок">
+  <a href="tel:+380000000000" class="fc-btn call" title="Зателефонувати">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
   </a>
 </div>
+
+<script>
+(function () {
+  var form = document.getElementById('lead-form');
+  var errorEl = document.getElementById('form-error');
+  var successEl = document.getElementById('quiz-success');
+  var submitBtn = document.getElementById('lead-submit');
+
+  // знімаємо позначку помилки, щойно користувач відповідає
+  form.addEventListener('change', function (e) {
+    var step = e.target.closest('.step');
+    if (step) step.classList.remove('missing');
+    errorEl.classList.remove('show');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // 1. валідація: всі три питання + email
+    var ok = true;
+    ['Мова', 'Призначення', 'Документ'].forEach(function (name) {
+      var checked = form.querySelector('input[name="' + name + '"]:checked');
+      var step = form.querySelector('input[name="' + name + '"]').closest('.step');
+      step.classList.toggle('missing', !checked);
+      if (!checked) ok = false;
+    });
+    var email = document.getElementById('lead-email');
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    email.classList.toggle('invalid', !emailOk);
+    if (!emailOk) ok = false;
+
+    if (!ok) {
+      errorEl.classList.add('show');
+      var firstMiss = form.querySelector('.step.missing') || email;
+      firstMiss.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // 2. відправка
+    var data = new FormData(form);
+    var doc = form.querySelector('input[name="Документ"]:checked').value;
+    var lang = form.querySelector('input[name="Мова"]:checked').value;
+    data.append('subject', '🔥 Лід DOCU: ' + doc + ' → ' + lang);
+    data.append('replyto', email.value.trim());
+
+    var btnHtml = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Надсилаємо…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data,
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.success) {
+          form.hidden = true;
+          successEl.hidden = false;
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error(res.message || 'send failed');
+        }
+      })
+      .catch(function () {
+        errorEl.textContent = 'Не вдалося надіслати. Спробуйте ще раз або напишіть нам у Telegram.';
+        errorEl.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = btnHtml;
+      });
+  });
+})();
+</script>
 
 </body>
 </html>
