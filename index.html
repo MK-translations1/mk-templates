@@ -810,6 +810,19 @@
     .floating-contacts { right: 16px; bottom: 16px; }
     .fc-btn { width: 48px; height: 48px; }
   }
+  /* MOBILE: компактна вертикаль, форма ближче до першого екрана */
+  @media (max-width: 640px) {
+    section { padding: 56px 0; }
+    .hero { padding: 120px 0 56px; }
+    .hero .lead { margin: 18px 0 28px; }
+    .hero-trust { margin-top: 28px; gap: 22px; }
+    .hero-visual { gap: 12px; }
+    .doc-page { max-height: 220px; }
+    .doc-main { padding: 20px; }
+    .doc-bottom-row { display: none; }
+    .quiz-header { margin-bottom: 32px; }
+    .step { margin-bottom: 28px; }
+  }
 </style>
 </head>
 <body>
@@ -849,8 +862,8 @@
             <div class="label">років<br>досвіду</div>
           </div>
           <div class="trust-item">
-            <div class="num">80+</div>
-            <div class="label">мов<br>перекладу</div>
+            <div class="num">5+</div>
+            <div class="label">готових<br>шаблонів</div>
           </div>
           <div class="trust-item">
             <div class="num">15хв</div>
@@ -909,40 +922,6 @@
             <div style="font-size: 0.9rem; opacity: 0.7;">Шаблони перекладу документів</div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY / BENEFITS -->
-<section class="why" id="why">
-  <div class="container">
-    <div class="why-header">
-      <span class="eyebrow">Чому це працює</span>
-      <h2>Шаблони, яким довіряють установи</h2>
-      <p class="lead">Ці макети формувалися роками реальної практики. Їх приймали банки, нотаріуси, міграційні служби, університети. Ми добре вивчили, як має виглядати документ, щоб його прийняли з першого разу.</p>
-    </div>
-    <div class="benefits">
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h3>Економія часу</h3>
-        <p>Заповнюєте одразу, без очікування та узгоджень. 15 хвилин — і документ готовий до подачі.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <h3>Економія грошей</h3>
-        <p>Платите за шаблон, а не за повну послугу бюро. Та сама якість — у рази дешевше.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.4 0 4.6.94 6.22 2.47"/></svg>
-        </div>
-        <h3>Перевірена якість</h3>
-        <p>Структура й оформлення від бюро перекладів із багаторічним досвідом. Без ризику для документа.</p>
       </div>
     </div>
   </div>
@@ -1048,6 +1027,40 @@
           <h3>Заявку отримано!</h3>
           <p>Ми вже бачимо ваш запит і надішлемо шаблон на вказаний email найближчим часом. Якщо щось термінове — пишіть у Telegram.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / BENEFITS -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="why-header">
+      <span class="eyebrow">Чому це працює</span>
+      <h2>Шаблони, яким довіряють установи</h2>
+      <p class="lead">Ці макети формувалися роками реальної практики. Їх приймали банки, нотаріуси, міграційні служби, університети. Ми добре вивчили, як має виглядати документ, щоб його прийняли з першого разу.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Економія часу</h3>
+        <p>Заповнюєте одразу, без очікування та узгоджень. 15 хвилин — і документ готовий до подачі.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Економія грошей</h3>
+        <p>Платите за шаблон, а не за повну послугу бюро. Та сама якість — у рази дешевше.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.4 0 4.6.94 6.22 2.47"/></svg>
+        </div>
+        <h3>Перевірена якість</h3>
+        <p>Структура й оформлення від бюро перекладів із багаторічним досвідом. Без ризику для документа.</p>
       </div>
     </div>
   </div>
