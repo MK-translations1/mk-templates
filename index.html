@@ -261,9 +261,16 @@
     border-radius: 100px;
     font-weight: 700;
   }
-  .doc-line { height: 9px; background: var(--bg-blue); border-radius: 4px; }
-  .doc-line.short { width: 55%; }
-  .doc-line.medium { width: 78%; }
+  .doc-page {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    max-height: 420px;
+    object-fit: cover;
+    object-position: top center;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  }
   /* bottom row: download + steps */
   .doc-bottom-row {
     display: grid;
@@ -760,16 +767,10 @@
         </div>
         <div class="doc-main">
           <div class="doc-header">
-            <div class="doc-title">СВІДОЦТВО · CERTIFICATE</div>
-            <div class="badge">EN</div>
+            <div class="doc-title">ПАСПОРТ · REISEPASS</div>
+            <div class="badge">DE</div>
           </div>
-          <div class="doc-line medium"></div>
-          <div class="doc-line"></div>
-          <div class="doc-line short"></div>
-          <div class="doc-line medium"></div>
-          <div class="doc-line"></div>
-          <div class="doc-line short"></div>
-          <div class="doc-line medium"></div>
+          <img class="doc-page" src="assets/template-preview.png" alt="Готовий шаблон перекладу паспорта громадянина України німецькою мовою" loading="lazy" width="827" height="1169">
         </div>
         <div class="doc-bottom-row">
           <div class="doc-floating">
