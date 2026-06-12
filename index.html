@@ -961,7 +961,7 @@
         <form id="lead-form" novalidate>
           <input type="hidden" name="access_key" value="7f1667a5-0845-4eb0-aafd-0a952c600ecb">
           <input type="hidden" name="from_name" value="DOCU.templates — лендінг">
-          <input type="hidden" name="Джерело (UTM)" id="utm-field" value="прямий захід">
+          <input type="hidden" name="UTM Source" id="utm-field" value="прямий захід">
           <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
 
           <div class="step" data-step="lang">
@@ -970,9 +970,9 @@
               <div class="step-q">На яку мову перекладаємо?</div>
             </div>
             <div class="options">
-              <label><input type="radio" name="Мова" value="Англійська">🇬🇧 Англійська</label>
-              <label><input type="radio" name="Мова" value="Німецька">🇩🇪 Німецька</label>
-              <label><input type="radio" name="Мова" value="Польська">🇵🇱 Польська</label>
+              <label><input type="radio" name="Language" value="Англійська">🇬🇧 Англійська</label>
+              <label><input type="radio" name="Language" value="Німецька">🇩🇪 Німецька</label>
+              <label><input type="radio" name="Language" value="Польська">🇵🇱 Польська</label>
             </div>
           </div>
           <div class="step" data-step="dest">
@@ -981,9 +981,9 @@
               <div class="step-q">Куди подаємо переклад?</div>
             </div>
             <div class="options">
-              <label><input type="radio" name="Призначення" value="Для навчання">Для навчання</label>
-              <label><input type="radio" name="Призначення" value="В офіційну установу">В офіційну установу</label>
-              <label><input type="radio" name="Призначення" value="Інше">Інше</label>
+              <label><input type="radio" name="Destination" value="Для навчання">Для навчання</label>
+              <label><input type="radio" name="Destination" value="В офіційну установу">В офіційну установу</label>
+              <label><input type="radio" name="Destination" value="Інше">Інше</label>
             </div>
           </div>
           <div class="step" data-step="doc">
@@ -992,9 +992,9 @@
               <div class="step-q">Який документ потрібно перекласти?</div>
             </div>
             <div class="options">
-              <label><input type="radio" name="Документ" value="Паспорт">Паспорт</label>
-              <label><input type="radio" name="Документ" value="Свідоцтво про народження">Свідоцтво про народження</label>
-              <label><input type="radio" name="Документ" value="ІПН">ІПН</label>
+              <label><input type="radio" name="Document" value="Паспорт">Паспорт</label>
+              <label><input type="radio" name="Document" value="Свідоцтво про народження">Свідоцтво про народження</label>
+              <label><input type="radio" name="Document" value="ІПН">ІПН</label>
             </div>
           </div>
           <div class="step" data-step="contact">
@@ -1009,7 +1009,7 @@
               </div>
               <div class="field">
                 <label for="lead-phone">Телефон або Telegram <span class="opt">(необов'язково)</span></label>
-                <input type="text" id="lead-phone" name="Телефон / Telegram" placeholder="+380… або @username">
+                <input type="text" id="lead-phone" name="Phone or Telegram" placeholder="+380… або @username">
               </div>
             </div>
           </div>
@@ -1193,7 +1193,7 @@
 
     // 1. валідація: всі три питання + email
     var ok = true;
-    ['Мова', 'Призначення', 'Документ'].forEach(function (name) {
+    ['Language', 'Destination', 'Document'].forEach(function (name) {
       var checked = form.querySelector('input[name="' + name + '"]:checked');
       var step = form.querySelector('input[name="' + name + '"]').closest('.step');
       step.classList.toggle('missing', !checked);
@@ -1213,8 +1213,8 @@
 
     // 2. відправка
     var data = new FormData(form);
-    var doc = form.querySelector('input[name="Документ"]:checked').value;
-    var lang = form.querySelector('input[name="Мова"]:checked').value;
+    var doc = form.querySelector('input[name="Document"]:checked').value;
+    var lang = form.querySelector('input[name="Language"]:checked').value;
     data.append('subject', '🔥 Лід DOCU: ' + doc + ' → ' + lang);
     data.append('replyto', email.value.trim());
 
