@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5TGH4N9C');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Шаблони перекладу документів — DOCU</title>
@@ -832,6 +839,10 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5TGH4N9C"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAV -->
 <nav>
@@ -1253,12 +1264,10 @@
           form.hidden = true;
           successEl.hidden = false;
           successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // конверсія для Google Ads / GA4 (активується після додавання gtag.js)
-          if (typeof gtag === 'function') {
-            gtag('event', 'generate_lead', { document: doc, language: lang });
-            // TODO: розкоментувати після створення дії-конверсії в Google Ads:
-            // gtag('event', 'conversion', { send_to: 'AW-XXXXXXXXX/YYYYYYYYYYY' });
-          }
+          // подія конверсії для Google Tag Manager — маркетинг чіпляє на неї
+          // тригери GA4 / Google Ads / Meta прямо в інтерфейсі GTM
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'lead_submitted', document: doc, language: lang });
         } else {
           throw new Error(res.message || 'send failed');
         }
